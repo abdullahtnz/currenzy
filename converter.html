@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Currency Converter</title>
+  <link rel="icon" href="c..png" type="image/png">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="converter.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+        <nav class="container">
+            <a href="index.html" class="logo">
+                currenzy
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="rates.html">Rates</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+  <section class="converter-section">
+    <h1>Currency Converter</h1>
+    <div class="converter-box">
+      <input type="number" id="amount" placeholder="Enter amount" />
+
+      <select id="from-currency"  onchange="setFrom(this.value)">
+            <option value="EUR">EUR - Euro</option>
+            <option value="AUD">AUD - Australian Dollar</option>
+            <option value="BGN">BGN - Bulgarian Lev</option>
+            <option value="BRL">BRL - Brazilian Real</option>
+            <option value="CAD">CAD - Canadian Dollar</option>
+            <option value="CHF">CHF - Swiss Franc</option>
+            <option value="CNY">CNY - Chinese Renminbi</option>
+            <option value="CZK">CZK - Czech Koruna</option>
+            <option value="DKK">DKK - Danish Krone</option>
+            <option value="GBP">GBP - British Pound</option>
+            <option value="HKD">HKD - Hong Kong Dollar</option>
+            <option value="HUF">HUF - Hungarian Forint</option>
+            <option value="IDR">IDR - Indonesian Rupiah</option>
+            <option value="INR">INR - Indian Rupee</option>
+            <option value="ISK">ISK - Icelandic Króna</option>
+            <option value="JPY">JPY - Japanese Yen</option>
+            <option value="KRW">KRW - South Korean Won</option>
+            <option value="MXN">MXN - Mexican Peso</option>
+            <option value="MYR">MYR - Malaysian Ringgit</option>
+            <option value="NOK">NOK - Norwegian Krone</option>
+            <option value="NZD">NZD - New Zealand Dollar</option>
+            <option value="PHP">PHP - Philippine Peso</option>
+            <option value="PLN">PLN - Polish Złoty</option>
+            <option value="RON">RON - Romanian Leu</option>
+            <option value="SEK">SEK - Swedish Krona</option>
+            <option value="SGD">SGD - Singapore Dollar</option>
+            <option value="THB">THB - Thai Baht</option>
+            <option value="TRY">TRY - Turkish Lira</option>
+            <option value="USD">USD - US Dollar</option>
+            <option value="ZAR">ZAR - South African Rand</option>
+      </select>
+
+      <select id="to-currency" onchange="setTo(this.value)">
+            <option value="USD">USD - US Dollar</option>
+            <option value="AUD">AUD - Australian Dollar</option>
+            <option value="BGN">BGN - Bulgarian Lev</option>
+            <option value="BRL">BRL - Brazilian Real</option>
+            <option value="CAD">CAD - Canadian Dollar</option>
+            <option value="CHF">CHF - Swiss Franc</option>
+            <option value="CNY">CNY - Chinese Renminbi</option>
+            <option value="CZK">CZK - Czech Koruna</option>
+            <option value="DKK">DKK - Danish Krone</option>
+            <option value="EUR">EUR - Euro</option>
+            <option value="GBP">GBP - British Pound</option>
+            <option value="HKD">HKD - Hong Kong Dollar</option>
+            <option value="HUF">HUF - Hungarian Forint</option>
+            <option value="IDR">IDR - Indonesian Rupiah</option>
+            <option value="INR">INR - Indian Rupee</option>
+            <option value="ISK">ISK - Icelandic Króna</option>
+            <option value="JPY">JPY - Japanese Yen</option>
+            <option value="KRW">KRW - South Korean Won</option>
+            <option value="MXN">MXN - Mexican Peso</option>
+            <option value="MYR">MYR - Malaysian Ringgit</option>
+            <option value="NOK">NOK - Norwegian Krone</option>
+            <option value="NZD">NZD - New Zealand Dollar</option>
+            <option value="PHP">PHP - Philippine Peso</option>
+            <option value="PLN">PLN - Polish Złoty</option>
+            <option value="RON">RON - Romanian Leu</option>
+            <option value="SEK">SEK - Swedish Krona</option>
+            <option value="SGD">SGD - Singapore Dollar</option>
+            <option value="THB">THB - Thai Baht</option>
+            <option value="TRY">TRY - Turkish Lira</option>
+            <option value="ZAR">ZAR - South African Rand</option>
+      </select>
+
+      <button class="convert-btn" id="convert-btn" onclick=convert()>Convert</button>
+      <div class="loader" id="loader"></div>
+      <div class="result-display" id="result">Result will be here</div>
+    </div>
+  </section>
+
+ <footer>
+        <div class="container">
+            <p>&copy; 2025 currenzy. All rights reserved.</p>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/abdullahtnz"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.instagram.com/abdullahtnz/"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+<script src="main.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Exchange Rates</title>
+  <link rel="icon" href="c..png" type="image/png">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      z-index: 1000;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: white;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #4ecdc4;
+    }
+
+    .cta-btn {
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .rates-section {
+      padding: 8rem 2rem 4rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .rates-section h1 {
+      text-align: center;
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 800;
+      margin-bottom: 2.5rem;
+    }
+
+    .rates-table-container {
+      overflow-x: auto;
+      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 600px;
+    }
+
+    thead {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    th, td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    tbody tr:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    footer {
+      background: rgba(0, 0, 0, 0.2);
+      padding: 2rem 0;
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    footer p {
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 1rem;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .social-links a {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      color: #4ecdc4;
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 600px) {
+      .nav-links {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .rates-section {
+        padding: 7rem 1rem 3rem;
+      }
+
+      table {
+        font-size: 0.9rem;
+        min-width: unset;
+      }
+
+      th, td {
+        padding: 0.7rem;
+      }
+
+      .rates-section h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav class="container">
+      <a href="index.html" class="logo">currenzy</a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="https://frankfurter.dev/">API</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+      <a href="converter.html" class="cta-btn">Get Started</a>
+      <button class="menu-toggle" id="menuToggle">
+        <i class="fas fa-bars"></i>
+      </button>
+    </nav>
+  </header>
+
+  <section class="rates-section">
+    <h1>Live Exchange Rates</h1>
+    <div class="rates-table-container">
+      <table id="rates-table">
+        <thead>
+          <tr>
+            <th>Currency</th>
+            <th>Rate (Base: USD)</th>
+          </tr>
+        </thead>
+        <tbody>
+                <tr><td>EUR - Euro</td><td class="dataRates" id="eur"></td></tr>
+                <tr><td>USD - US Dollar</td><td class="dataRates" id="usd">1.00</td></tr>
+                <tr><td>AUD - Australian Dollar</td><td class="dataRates" id="aud"></td></tr>
+                <tr><td>BGN - Bulgarian Lev</td><td class="dataRates" id="bgn"></td></tr>
+                <tr><td>BRL - Brazilian Real</td><td class="dataRates" id="brl"></td></tr>
+                <tr><td>CAD - Canadian Dollar</td><td class="dataRates" id="cad"></td></tr>
+                <tr><td>CHF - Swiss Franc</td><td class="dataRates" id="chf"></td></tr>
+                <tr><td>CNY - Chinese Renminbi</td><td class="dataRates" id="cny"></td></tr>
+                <tr><td>CZK - Czech Koruna</td><td class="dataRates" id="czk"></td></tr>
+                <tr><td>DKK - Danish Krone</td><td class="dataRates" id="dkk"></td></tr>
+                <tr><td>GBP - British Pound</td><td class="dataRates" id="gbp"></td></tr>
+                <tr><td>HKD - Hong Kong Dollar</td><td class="dataRates" id="hkd"></td></tr>
+                <tr><td>HUF - Hungarian Forint</td><td class="dataRates" id="huf"></td></tr>
+                <tr><td>IDR - Indonesian Rupiah</td><td class="dataRates" id="idr"></td></tr>
+                <tr><td>INR - Indian Rupee</td><td class="dataRates" id="inr"></td></tr>
+                <tr><td>ISK - Icelandic Króna</td><td class="dataRates" id="isk"></td></tr>
+                <tr><td>JPY - Japanese Yen</td><td class="dataRates" id="jpy"></td></tr>
+                <tr><td>KRW - South Korean Won</td><td class="dataRates" id="krw"></td></tr>
+                <tr><td>MXN - Mexican Peso</td><td class="dataRates" id="mxn"></td></tr>
+                <tr><td>MYR - Malaysian Ringgit</td><td class="dataRates" id="myr"></td></tr>
+                <tr><td>NOK - Norwegian Krone</td><td class="dataRates" id="nok"></td></tr>
+                <tr><td>NZD - New Zealand Dollar</td><td class="dataRates" id="nzd"></td></tr>
+                <tr><td>PHP - Philippine Peso</td><td class="dataRates" id="php"></td></tr>
+                <tr><td>PLN - Polish Złoty</td><td class="dataRates" id="pln"></td></tr>
+                <tr><td>RON - Romanian Leu</td><td class="dataRates" id="ron"></td></tr>
+                <tr><td>SEK - Swedish Krona</td><td class="dataRates" id="sek"></td></tr>
+                <tr><td>SGD - Singapore Dollar</td><td class="dataRates" id="sgd"></td></tr>
+                <tr><td>THB - Thai Baht</td><td class="dataRates" id="thb"></td></tr>
+                <tr><td>TRY - Turkish Lira</td><td class="dataRates" id="try"></td></tr>
+                <tr><td>ZAR - South African Rand</td><td class="dataRates" id="zar"></td></tr>
+          </tbody>
+        </table>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 currenzy. All rights reserved.</p>
+      <div class="social-links">
+            <a href="https://www.linkedin.com/abdullahtnz"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.instagram.com/abdullahtnz/"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
